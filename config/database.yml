@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  port: 5432
+  host: localhost
+  username: postgres
+  password: postgres
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: production_adherence_development
+
+test:
+  <<: *default
+  database: production_adherence_test
+
+production:
+  <<: *default
+  database: production_adherence_production
+  username: production_adherence
+  password: <%= ENV["PRODUCTION_ADHERENCE_DATABASE_PASSWORD"] %>

@@ -1,0 +1,20 @@
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "db/**/*"
+    - "script/**/*"
+    - "bin/**/*"
+    - "node_modules/**/*"
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "config/**/*"
+    - "spec/**/*"
