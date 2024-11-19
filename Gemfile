@@ -10,6 +10,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails"
 gem "bootsnap", require: false
+gem "kaminari"
 
 # Testing
 gem "rspec-rails"
