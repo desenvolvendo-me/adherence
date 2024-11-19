@@ -1,0 +1,36 @@
+<%= form_with(model: machine, class: "space-y-6") do |f| %>
+  <% if machine.errors.any? %>
+    <div class="bg-red-50 p-4 rounded-lg">
+      <div class="text-sm text-red-700">
+        <h2><%= pluralize(machine.errors.count, "erro") %> encontrado:</h2>
+        <ul class="list-disc pl-5">
+          <% machine.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :code, "Código", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :code, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+  </div>
+
+  <div>
+    <%= f.label :name, "Nome", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+  </div>
+
+  <div>
+    <%= f.label :status, "Situação", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.select :status, Machine.statuses.keys.map { |s| [s.titleize, s] },
+                 {},
+                 class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+  </div>
+
+  <div class="flex justify-end gap-4">
+    <%= link_to "Cancelar", machines_path, class: "px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-500" %>
+    <%= f.submit class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg" %>
+  </div>
+<% end %>
