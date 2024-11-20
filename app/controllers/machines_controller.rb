@@ -5,7 +5,6 @@ class MachinesController < ApplicationController
     @machines = Machine.search(params[:search])
                        .order(:name)
                        .page(params[:page])
-                       .per(10)
   end
 
   def new
