@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 ruby "3.2.2"
 
-gem "rails", github: "rails/rails", branch: "7-2-stable"
-gem "pg", "~> 1.1"
+gem "rails", "~> 7.1.2"
+gem "pg", "~> 1.5.4"
 gem "puma", "~> 6.0"
 gem "propshaft"
 gem "importmap-rails"
@@ -11,6 +11,7 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 gem "bootsnap", require: false
 gem "kaminari"
+gem 'ransack'
 gem "foreman"
 
 # Testing
