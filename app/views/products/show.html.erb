@@ -1,0 +1,68 @@
+<!-- app/views/products/show.html.erb -->
+<header class="bg-white shadow">
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-900">Detalhes do Produto</h1>
+      <%= link_to products_path,
+                  class: "text-gray-600 hover:text-gray-900 font-medium" do %>
+        ← Voltar
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        <%= @product.name %>
+      </h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">
+        Código: <%= @product.code %>
+      </p>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+      <dl class="sm:divide-y sm:divide-gray-200">
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">Tempo Padrão</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= number_with_precision(@product.standard_time, precision: 2) %>s
+          </dd>
+        </div>
+
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">Tempo de Setup</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= number_with_precision(@product.setup_time, precision: 2) %>min
+          </dd>
+        </div>
+
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">Status</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <% status_color = case @product.status
+                              when 'active' then 'green'
+                              when 'inactive' then 'red'
+                              else 'yellow' end %>
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-<%= status_color %>-100 text-<%= status_color %>-800">
+              <%= t("activerecord.attributes.product.statuses.#{@product.status}") %>
+            </span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="mt-6 flex justify-end space-x-4">
+    <%= link_to "Editar",
+                edit_product_path(@product),
+                class: "bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg" %>
+    <%= link_to "Inativar",
+                product_path(@product),
+                data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Tem certeza que deseja inativar este produto?"
+                },
+                class: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg" %>
+  </div>
+</div>

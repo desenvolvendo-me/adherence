@@ -1,0 +1,76 @@
+<!-- app/views/products/_form.html.erb -->
+<%= form_with(model: product, class: "space-y-6") do |form| %>
+  <% if product.errors.any? %>
+    <div class="bg-red-50 p-4 rounded-md">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-9v4a1 1 0 102 0V9a1 1 0 10-2 0zm1-3a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">
+            Foram encontrados <%= pluralize(product.errors.count, 'erro', 'erros') %>:
+          </h3>
+          <div class="mt-2 text-sm text-red-700">
+            <ul class="list-disc pl-5 space-y-1">
+              <% product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 gap-4">
+    <div>
+      <%= form.label :code, "Código", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :code,
+                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :name, "Nome", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :name,
+                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :standard_time, "Tempo Padrão (segundos)",
+                     class: "block text-sm font-medium text-gray-700" %>
+      <%= form.number_field :standard_time,
+                            step: :any,
+                            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :setup_time, "Tempo de Setup (minutos)",
+                     class: "block text-sm font-medium text-gray-700" %>
+      <%= form.number_field :setup_time,
+                            step: :any,
+                            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :status, "Situação",
+                     class: "block text-sm font-medium text-gray-700" %>
+      <%= form.select :status,
+                      options_for_select(
+                        Product.statuses.map { |k, v| [t("activerecord.attributes.product.statuses.#{k}"), k] },
+                        selected: product.status
+                      ),
+                      {},
+                      class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+  </div>
+
+  <div class="flex justify-end space-x-3">
+    <%= link_to "Cancelar",
+                products_path,
+                class: "px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900" %>
+
+    <%= form.submit class: "px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+  </div>
+<% end %>
