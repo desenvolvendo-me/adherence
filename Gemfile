@@ -11,6 +11,7 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 gem "bootsnap", require: false
 gem "kaminari"
+gem "foreman"
 
 # Testing
 gem "rspec-rails"
