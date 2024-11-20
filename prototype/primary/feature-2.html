@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de Produção Real</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <!-- Header com Status Geral -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Entrada de Produção Real</h1>
+                    <p class="text-gray-600 mt-1">Acompanhamento e registro da produção</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">Aderência Geral</p>
+                        <p class="text-2xl font-bold text-green-600">98.5%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seletor de Data e Turno -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Data de Produção
+                    </label>
+                    <input type="date" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Turno
+                    </label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="1">1º Turno (06:00 - 14:00)</option>
+                        <option value="2">2º Turno (14:00 - 22:00)</option>
+                        <option value="3">3º Turno (22:00 - 06:00)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Entrada de Produção -->
+        <div id="productionModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900" id="modalProductName">Produto A</h3>
+                            <p class="text-sm text-gray-600" id="modalMachineName">Máquina 01</p>
+                        </div>
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Meta</label>
+                                <p class="text-2xl font-semibold text-gray-900" id="modalTarget">1000</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Realizado</label>
+                                <input type="number" id="modalActual"
+                                       class="w-full px-3 py-2 text-xl border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+
+                        <div id="deviationSection" class="hidden">
+                            <label class="block text-sm font-medium text-red-700 mb-1">Motivo do Desvio</label>
+                            <select class="w-full px-3 py-2 border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                                <option value="">Selecione o motivo</option>
+                                <option value="1">Manutenção não programada</option>
+                                <option value="2">Falta de material</option>
+                                <option value="3">Setup prolongado</option>
+                                <option value="4">Problema de qualidade</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button onclick="closeModal()" 
+                                class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900">
+                            Cancelar
+                        </button>
+                        <button onclick="saveProduction()" 
+                                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Listagem de Máquinas com Cards de Produtos -->
+        <div class="space-y-6">
+            <!-- Máquina 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-900">Máquina 01</h2>
+                            <p class="text-sm text-gray-600">Injetora 150t</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Aderência</p>
+                            <p class="text-xl font-bold text-green-600">99.2%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grid de Produtos -->
+                <div class="p-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <!-- Produto 1 -->
+                        <div onclick="openModal('Produto A', 'Máquina 01', 1000, 992)" 
+                             class="cursor-pointer group hover:shadow-lg transition-shadow duration-200 rounded-lg border border-gray-200 p-4 bg-white">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600">Produto A</h3>
+                                    <p class="text-xs text-gray-500">PRD-001</p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    99.2%
+                                </span>
+                            </div>
+                            <div class="mt-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600">Meta:</span>
+                                    <span class="font-medium">1000</span>
+                                </div>
+                                <div class="flex justify-between text-sm mt-1">
+                                    <span class="text-gray-600">Real:</span>
+                                    <span class="font-medium">992</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-green-600 h-1.5 rounded-full" style="width: 99.2%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 2 -->
+                        <div onclick="openModal('Produto B', 'Máquina 01', 800, 720)"
+                             class="cursor-pointer group hover:shadow-lg transition-shadow duration-200 rounded-lg border border-gray-200 p-4 bg-white">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600">Produto B</h3>
+                                    <p class="text-xs text-gray-500">PRD-002</p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    90%
+                                </span>
+                            </div>
+                            <div class="mt-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600">Meta:</span>
+                                    <span class="font-medium">800</span>
+                                </div>
+                                <div class="flex justify-between text-sm mt-1">
+                                    <span class="text-gray-600">Real:</span>
+                                    <span class="font-medium">720</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-yellow-600 h-1.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Máquina 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-900">Máquina 02</h2>
+                            <p class="text-sm text-gray-600">Injetora 200t</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Aderência</p>
+                            <p class="text-xl font-bold text-red-600">85.5%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grid de Produtos -->
+                <div class="p-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <!-- Produto 1 -->
+                        <div onclick="openModal('Produto C', 'Máquina 02', 1500, 1283)"
+                             class="cursor-pointer group hover:shadow-lg transition-shadow duration-200 rounded-lg border border-gray-200 p-4 bg-white">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900 group-hover:text-blue-600">Produto C</h3>
+                                    <p class="text-xs text-gray-500">PRD-003</p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    85.5%
+                                </span>
+                            </div>
+                            <div class="mt-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600">Meta:</span>
+                                    <span class="font-medium">1500</span>
+                                </div>
+                                <div class="flex justify-between text-sm mt-1">
+                                    <span class="text-gray-600">Real:</span>
+                                    <span class="font-medium">1283</span>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-red-600 h-1.5 rounded-full" style="width: 85.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(productName, machineName, target, actual) {
+            document.getElementById('modalProductName').textContent = productName;
+            document.getElementById('modalMachineName').textContent = machineName;
+            document.getElementById('modalTarget').textContent = target;
+            document.getElementById('modalActual').value = actual;
+            
+            // Show deviation section if actual is less than 95% of target
+            const adherence = (actual / target) * 100;
+            document.getElementById('deviationSection').className = 
+                adherence < 95 ? 'block mt-4' : 'hidden';
+            
+            document.getElementById('productionModal').className = 
+                'fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center';
+        }
+
+        function closeModal() {
+            document.getElementById('productionModal').className = 'hidden';
+        }
+
+        function saveProduction() {
+            // Implement save logic here
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('productionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

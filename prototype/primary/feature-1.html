@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento de Produção</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">Planejamento de Produção</h1>
+            <p class="text-gray-600">Defina as metas de produção por máquina</p>
+        </div>
+
+        <!-- Main Form -->
+        <form class="bg-white rounded-lg shadow-md p-6">
+            <!-- Basic Info Section -->
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Data do Planejamento -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Data do Planejamento
+                        </label>
+                        <input type="date" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               required>
+                    </div>
+                    
+                    <!-- Turno -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Turno
+                        </label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required>
+                            <option value="">Selecione o turno</option>
+                            <option value="1">1º Turno (06:00 - 14:00)</option>
+                            <option value="2">2º Turno (14:00 - 22:00)</option>
+                            <option value="3">3º Turno (22:00 - 06:00)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Production Planning Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Máquina</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Produto</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Meta (unid.)</th>
+                                <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200" id="planningRows">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3">
+                                    <select class="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                            required>
+                                        <option value="">Selecione a máquina</option>
+                                        <option value="1">Máquina 01</option>
+                                        <option value="2">Máquina 02</option>
+                                        <option value="3">Máquina 03</option>
+                                    </select>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <select class="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                            required>
+                                        <option value="">Selecione o produto</option>
+                                        <option value="1">Produto A</option>
+                                        <option value="2">Produto B</option>
+                                        <option value="3">Produto C</option>
+                                    </select>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <input type="number" 
+                                           class="w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                           required
+                                           min="1">
+                                </td>
+                                <td class="px-4 py-3">
+                                    <button type="button" 
+                                            class="text-red-600 hover:text-red-800"
+                                            onclick="this.closest('tr').remove()">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Add Row Button -->
+                <div class="flex justify-center">
+                    <button type="button"
+                            class="flex items-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-800"
+                            onclick="addRow()">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Adicionar Máquina
+                    </button>
+                </div>
+
+                <!-- Capacity Warning -->
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 hidden" id="capacityWarning">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                Atenção: A meta definida excede a capacidade normal da máquina.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="mt-8 flex justify-end space-x-4">
+                <button type="button" 
+                        class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none">
+                    Cancelar
+                </button>
+                <button type="submit" 
+                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Salvar Planejamento
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function addRow() {
+            const template = document.querySelector('#planningRows tr').cloneNode(true);
+            template.querySelectorAll('input, select').forEach(input => {
+                input.value = '';
+            });
+            document.querySelector('#planningRows').appendChild(template);
+        }
+
+        // Simulating capacity check
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('change', (e) => {
+                if (parseInt(e.target.value) > 1000) {
+                    document.getElementById('capacityWarning').classList.remove('hidden');
+                } else {
+                    document.getElementById('capacityWarning').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
