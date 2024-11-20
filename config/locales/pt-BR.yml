@@ -1,0 +1,32 @@
+pt-BR:
+  activerecord:
+    models:
+      machine:
+        one: Máquina
+        other: Máquinas
+    attributes:
+      machine:
+        code: Código
+        name: Nome
+        type: Tipo
+        capacity: Capacidade
+        status: Status
+    errors:
+      models:
+        machine:
+          attributes:
+            code:
+              blank: não pode ficar em branco
+              taken: já está em uso
+            name:
+              blank: não pode ficar em branco
+              taken: já está em uso
+
+  # Mensagens genéricas de erro
+  errors:
+    messages:
+      blank: não pode ficar em branco
+      taken: já está em uso
+      too_short: é muito curto (mínimo é %{count} caracteres)
+      too_long: é muito longo (máximo é %{count} caracteres)
+      invalid: não é válido
