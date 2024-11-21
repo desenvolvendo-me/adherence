@@ -17,16 +17,18 @@
 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
   <!-- Filtros e Busca -->
   <div class="bg-white rounded-lg shadow p-6 mb-6">
-    <%= search_form_for @q, class: "grid grid-cols-1 md:grid-cols-3 gap-4" do |f| %>
+    <%= search_form_for @q, html: { class: "grid grid-cols-1 md:grid-cols-3 gap-4" } do |f| %>
       <div>
-        <%= f.label :code_or_name_cont, "Buscar", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :code_or_name_cont, "Buscar",
+                    class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.search_field :code_or_name_cont,
                            placeholder: "Código ou nome do produto",
                            class: "w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
       </div>
 
       <div>
-        <%= f.label :status_eq, "Status", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :status_eq, "Status",
+                    class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.select :status_eq,
                      options_for_select(
                        Product.statuses.map { |k, v| [t("activerecord.attributes.product.statuses.#{k}"), v] },

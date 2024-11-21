@@ -1,15 +1,19 @@
 <%= paginator.render do %>
-  <nav role="navigation" aria-label="pager" class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
-    <%= first_page_tag unless current_page.first? %>
-    <%= prev_page_tag unless current_page.first? %>
-    <% each_page do |page| %>
-      <% if page.display_tag? %>
-        <%= page_tag page %>
-      <% elsif !page.was_truncated? %>
-        <%= gap_tag %>
+  <nav>
+    <div class="flex items-center -space-x-px">
+      <%= first_page_tag unless current_page.first? %>
+      <%= prev_page_tag unless current_page.first? %>
+
+      <% each_page do |page| %>
+        <% if page.display_tag? %>
+          <%= page_tag page %>
+        <% elsif !page.was_truncated? %>
+          <%= gap_tag %>
+        <% end %>
       <% end %>
-    <% end %>
-    <%= next_page_tag unless current_page.last? %>
-    <%= last_page_tag unless current_page.last? %>
+
+      <%= next_page_tag unless current_page.last? %>
+      <%= last_page_tag unless current_page.last? %>
+    </div>
   </nav>
 <% end %>
