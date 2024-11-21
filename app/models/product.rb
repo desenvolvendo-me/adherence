@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  has_many :machine_products, dependent: :destroy
+  has_many :machines, through: :machine_products
+
   # Enums
   enum status: {
     active: 'active',
@@ -22,6 +25,10 @@ class Product < ApplicationRecord
 
   # Callbacks
   before_validation :upcase_code
+
+  accepts_nested_attributes_for :machine_products,
+                                allow_destroy: true,
+                                reject_if: lambda { |attributes| attributes['machine_id'].blank? }
 
   private
 

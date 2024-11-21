@@ -21,6 +21,16 @@ pt-BR:
             name:
               blank: não pode ficar em branco
               taken: já está em uso
+        product:
+          attributes:
+            code:
+              taken: "já está em uso"
+            standard_time:
+              blank: "não pode ficar em branco"
+              not_a_number: "deve ser um número"
+            setup_time:
+              blank: "não pode ficar em branco"
+              not_a_number: "deve ser um número"
 
   # Mensagens genéricas de erro
   errors:
@@ -30,3 +40,4 @@ pt-BR:
       too_short: é muito curto (mínimo é %{count} caracteres)
       too_long: é muito longo (máximo é %{count} caracteres)
       invalid: não é válido
+      not_a_number: "deve ser um número"

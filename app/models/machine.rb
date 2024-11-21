@@ -1,4 +1,7 @@
 class Machine < ApplicationRecord
+  has_many :machine_products, dependent: :destroy
+  has_many :products, through: :machine_products
+
   # Enums
   enum status: {
     active: 0,

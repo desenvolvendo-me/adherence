@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.machine_products.build
   end
 
   def edit
@@ -54,7 +55,12 @@ class ProductsController < ApplicationController
       :name,
       :standard_time,
       :setup_time,
-      :status
+      :status,
+      machine_products_attributes: [
+        :id,
+        :machine_id,
+        :_destroy
+      ]
     )
   end
 end

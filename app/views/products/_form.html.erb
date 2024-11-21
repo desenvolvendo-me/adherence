@@ -1,11 +1,11 @@
 <!-- app/views/products/_form.html.erb -->
 <%= form_with(model: product, class: "space-y-6") do |form| %>
   <% if product.errors.any? %>
-    <div class="bg-red-50 p-4 rounded-md">
+    <div class="bg-red-50 p-4 rounded-md mb-6">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-9v4a1 1 0 102 0V9a1 1 0 10-2 0zm1-3a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
           </svg>
         </div>
         <div class="ml-3">
@@ -27,35 +27,26 @@
   <div class="grid grid-cols-1 gap-4">
     <div>
       <%= form.label :code, "Código", class: "block text-sm font-medium text-gray-700" %>
-      <%= form.text_field :code,
-                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+      <%= form.text_field :code, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
     </div>
 
     <div>
       <%= form.label :name, "Nome", class: "block text-sm font-medium text-gray-700" %>
-      <%= form.text_field :name,
-                          class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+      <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
     </div>
 
     <div>
-      <%= form.label :standard_time, "Tempo Padrão (segundos)",
-                     class: "block text-sm font-medium text-gray-700" %>
-      <%= form.number_field :standard_time,
-                            step: :any,
-                            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+      <%= form.label :standard_time, "Tempo Padrão (segundos)", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.number_field :standard_time, step: :any, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
     </div>
 
     <div>
-      <%= form.label :setup_time, "Tempo de Setup (minutos)",
-                     class: "block text-sm font-medium text-gray-700" %>
-      <%= form.number_field :setup_time,
-                            step: :any,
-                            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+      <%= form.label :setup_time, "Tempo de Setup (minutos)", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.number_field :setup_time, step: :any, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
     </div>
 
     <div>
-      <%= form.label :status, "Situação",
-                     class: "block text-sm font-medium text-gray-700" %>
+      <%= form.label :status, "Situação", class: "block text-sm font-medium text-gray-700" %>
       <%= form.select :status,
                       options_for_select(
                         Product.statuses.map { |k, v| [t("activerecord.attributes.product.statuses.#{k}"), k] },
@@ -66,11 +57,111 @@
     </div>
   </div>
 
-  <div class="flex justify-end space-x-3">
-    <%= link_to "Cancelar",
-                products_path,
-                class: "px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900" %>
+  <div class="mt-8">
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-medium text-gray-900">Máquinas</h3>
+      <button type="button" id="add-machine" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded">
+        Adicionar Máquina
+      </button>
+    </div>
 
+    <div id="machines-container" class="mt-4 space-y-4">
+      <%= form.fields_for :machine_products do |mp_form| %>
+        <div class="machine-row bg-gray-50 p-4 rounded-lg">
+          <div class="grid grid-cols-1 gap-4">
+            <div>
+              <%= mp_form.label :machine_id, "Máquina", class: "block text-sm font-medium text-gray-700" %>
+              <%= mp_form.collection_select :machine_id,
+                                            Machine.all, :id, :name,
+                                            { prompt: "Selecione uma máquina" },
+                                            class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+            </div>
+          </div>
+          <div class="mt-2 flex justify-end">
+            <button type="button" class="remove-machine text-red-600 hover:text-red-900">
+              Remover
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-6 flex justify-end space-x-3">
+    <%= link_to "Cancelar", products_path, class: "px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900" %>
     <%= form.submit class: "px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
   </div>
+<% end %>
+
+<%= javascript_tag do %>
+  document.addEventListener('DOMContentLoaded', function() {
+  let machineIndex = <%= product.machine_products.size %>;
+
+  function getSelectedMachines() {
+  return Array.from(document.querySelectorAll('[name*="[machine_id]"]'))
+  .map(select => select.value)
+  .filter(value => value !== "");
+  }
+
+  function isMachineSelected(machineId) {
+  return getSelectedMachines().includes(machineId);
+  }
+
+  function updateMachineOptions() {
+  const selects = document.querySelectorAll('[name*="[machine_id]"]');
+  const selectedMachines = getSelectedMachines();
+
+  selects.forEach(select => {
+  Array.from(select.options).forEach(option => {
+  if (option.value && option.value !== select.value) {
+  option.disabled = selectedMachines.includes(option.value);
+  }
+  });
+  });
+  }
+
+  document.getElementById('add-machine').addEventListener('click', function() {
+  const container = document.getElementById('machines-container');
+  const template = `
+  <div class="machine-row bg-gray-50 p-4 rounded-lg">
+    <div class="grid grid-cols-1 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Máquina</label>
+        <select name="product[machine_products_attributes][${machineIndex}][machine_id]"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                onchange="this.dispatchEvent(new Event('change', { bubbles: true }))">
+          <option value="">Selecione uma máquina</option>
+          <%= Machine.all.map { |m| "<option value='#{m.id}'>#{m.name}</option>" }.join.html_safe %>
+        </select>
+      </div>
+    </div>
+    <div class="mt-2 flex justify-end">
+      <button type="button" class="remove-machine text-red-600 hover:text-red-900">
+        Remover
+      </button>
+    </div>
+  </div>
+  `;
+
+  container.insertAdjacentHTML('beforeend', template);
+  machineIndex++;
+  updateMachineOptions();
+  });
+
+  document.getElementById('machines-container').addEventListener('click', function(e) {
+  if (e.target.classList.contains('remove-machine')) {
+  e.target.closest('.machine-row').remove();
+  updateMachineOptions();
+  }
+  });
+
+  document.getElementById('machines-container').addEventListener('change', function(e) {
+  if (e.target.name && e.target.name.includes('[machine_id]')) {
+  updateMachineOptions();
+  }
+  });
+
+  // Inicializa o estado dos selects
+  updateMachineOptions();
+  });
 <% end %>
