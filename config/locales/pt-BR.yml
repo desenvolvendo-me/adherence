@@ -11,6 +11,9 @@ pt-BR:
         type: Tipo
         capacity: Capacidade
         status: Status
+        statuses:
+          active: "Ativa"
+          inactive: "Inativa"
     errors:
       models:
         machine:

@@ -19,6 +19,14 @@ class Machine < ApplicationRecord
     where("code ILIKE :term OR name ILIKE :term", term: "%#{term}%") if term.present?
   }
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["code", "name", "status"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["machine_products", "products"]
+  end
+
   private
 
   def validate_code_format
