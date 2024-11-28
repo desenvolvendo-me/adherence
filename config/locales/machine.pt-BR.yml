@@ -61,27 +61,24 @@ pt-BR:
     # Machine management dashboard
     index:
       title: "Máquinas"
-      description: "Gerencie sua infraestrutura de produção com eficiência e precisão"
+      description: "Gerencie suas maquinas"
       new_machine: "Adicionar Nova Máquina"
       search:
         label: "Buscar máquinas"
         placeholder: "Buscar por código ou nome..."
-        status_label: "Filtrar por status"
-        all_statuses: "Todos os status"
+        status_label: "Filtrar por situação"
+        all_statuses: "Todos os situações"
         button: "Buscar"
       table:
         code: "Código"
         name: "Nome"
-        status: "Status"
+        status: "Situação"
         efficiency: "Eficiência"
         actions: "Ações"
-      operational_status:
-        active: "Operacional"
-        inactive: "Inativa"
       actions:
-        show: "Visualizar Detalhes"
-        edit: "Editar Configurações"
-        deactivate: "Desativar Máquina"
+        show: "Visualizar"
+        edit: "Editar"
+        deactivate: "Inativar"
         confirm_deactivate: "Confirma a desativação desta máquina? Esta ação pode impactar a produção."
 
     # System messages and notifications

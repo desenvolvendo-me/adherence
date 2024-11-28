@@ -62,13 +62,14 @@ pt-BR:
 
     index:
       title: "Produtos"
-      description: "Gerencie seu catálogo de produtos e suas relações com máquinas."
-      new_product: "Novo Produto"
-      search_label: "Buscar produtos"
-      search_placeholder: "Buscar por código ou nome..."
-      status_label: "Filtrar por situação"
-      all_statuses: "Todas as situações"
-      search: "Buscar"
+      description: "Gerencie seus produtos"
+      new_product: "Adicionar Novo Produto"
+      search:
+        label: "Buscar produtos"
+        placeholder: "Buscar por código ou nome..."
+        status_label: "Filtrar por situação"
+        all_statuses: "Todos os situações"
+        button: "Buscar"
       table:
         code: "Código"
         name: "Nome"
