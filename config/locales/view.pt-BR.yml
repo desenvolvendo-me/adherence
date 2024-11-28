@@ -15,6 +15,25 @@ pt-BR:
         edit: "Editar"
         deactivate: "Inativar"
         confirm_deactivate: "Tem certeza que deseja inativar esta máquina?"
+    index:
+      title: "Máquinas"
+      new_machine: "Nova Máquina"
+      search_placeholder: "Buscar por código ou nome"
+      all_statuses: "Todos os status"
+      search: "Buscar"
+      table:
+        code: "Código"
+        name: "Nome"
+        status: "Situação"
+        actions: "Ações"
+      status:
+        active: "Ativa"
+        inactive: "Inativa"
+      actions:
+        show: "Ver"
+        edit: "Editar"
+        deactivate: "Inativar"
+        confirm_deactivate: "Tem certeza que deseja inativar esta máquina?"
   products:
     show:
       title: "Detalhes do Produto"
@@ -33,3 +52,24 @@ pt-BR:
       units:
         seconds: "s"
         minutes: "min"
+    index:
+      title: "Produtos"
+      new_product: "Novo Produto"
+      search_placeholder: "Buscar por código ou nome"
+      all_statuses: "Todos os status"
+      search: "Buscar"
+      table:
+        code: "Código"
+        name: "Nome"
+        standard_time: "Tempo Padrão"
+        setup_time: "Tempo de Setup"
+        status: "Situação"
+        actions: "Ações"
+      units:
+        seconds: "s"
+        minutes: "min"
+      actions:
+        show: "Ver"
+        edit: "Editar"
+        deactivate: "Inativar"
+        confirm_deactivate: "Tem certeza que deseja inativar este produto?"
