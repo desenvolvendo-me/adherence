@@ -4,6 +4,9 @@ pt-BR:
       machine:
         one: Máquina
         other: Máquinas
+      product:
+        one: Produto
+        other: Produtos
     attributes:
       machine:
         code: Código
@@ -14,6 +17,16 @@ pt-BR:
         statuses:
           active: "Ativa"
           inactive: "Inativa"
+      product:
+        code: Código
+        name: Nome
+        standard_time: Tempo Padrão
+        setup_time: Tempo de Setup
+        status: "Situação"
+        statuses:
+          active: "Ativa"
+          inactive: "Inativa"
+          in_development: "Em Desenvolvimento"
     errors:
       models:
         machine:

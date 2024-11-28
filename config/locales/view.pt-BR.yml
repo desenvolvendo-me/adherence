@@ -1,0 +1,35 @@
+pt-BR:
+  machines:
+    show:
+      title: "Detalhes da Máquina"
+      back: "Voltar"
+      code: "Código"
+      status:
+        title: "Situação"
+        active: "Ativa"
+        inactive: "Inativa"
+      products:
+        title: "Produtos Vinculados"
+        empty: "Nenhum produto vinculado"
+      actions:
+        edit: "Editar"
+        deactivate: "Inativar"
+        confirm_deactivate: "Tem certeza que deseja inativar esta máquina?"
+  products:
+    show:
+      title: "Detalhes do Produto"
+      back: "Voltar"
+      code: "Código"
+      standard_time: "Tempo Padrão"
+      setup_time: "Tempo de Setup"
+      status: "Situação"
+      machines:
+        title: "Máquinas Vinculadas"
+        empty: "Nenhuma máquina vinculada"
+      actions:
+        edit: "Editar"
+        deactivate: "Inativar"
+        confirm_deactivate: "Tem certeza que deseja inativar este produto?"
+      units:
+        seconds: "s"
+        minutes: "min"

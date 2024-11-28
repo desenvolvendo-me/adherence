@@ -1,9 +1,12 @@
 class MachinesController < ApplicationController
-  before_action :set_machine, only: [:edit, :update, :destroy]
+  before_action :set_machine, only: [:show, :edit, :update, :destroy]
 
   def index
     @q = Machine.ransack(params[:q])
     @machines = @q.result.page(params[:page])
+  end
+
+  def show
   end
 
   def new

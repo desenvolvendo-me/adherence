@@ -1,9 +1,9 @@
-<!-- app/views/products/show.html.erb -->
+<!-- app/views/machines/show.html.erb -->
 <header class="bg-white shadow">
   <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center">
       <h1 class="text-2xl font-bold text-gray-900"><%= t('.title') %></h1>
-      <%= link_to products_path,
+      <%= link_to machines_path,
                   class: "text-gray-600 hover:text-gray-900 font-medium" do %>
         ← <%= t('.back') %>
       <% end %>
@@ -15,59 +15,41 @@
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
-        <%= @product.name %>
+        <%= @machine.name %>
       </h3>
       <p class="mt-1 max-w-2xl text-sm text-gray-500">
-        <%= t('.code') %>: <%= @product.code %>
+        <%= t('.code') %>: <%= @machine.code %>
       </p>
     </div>
 
     <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
       <dl class="sm:divide-y sm:divide-gray-200">
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.standard_time') %></dt>
+          <dt class="text-sm font-medium text-gray-500"><%= t('.status.title') %></dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= number_with_precision(@product.standard_time, precision: 2) %><%= t('.units.seconds') %>
-          </dd>
-        </div>
-
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.setup_time') %></dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= number_with_precision(@product.setup_time, precision: 2) %><%= t('.units.minutes') %>
-          </dd>
-        </div>
-
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.status') %></dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <% status_color = case @product.status
-                              when 'active' then 'green'
-                              when 'inactive' then 'red'
-                              else 'yellow' end %>
+            <% status_color = @machine.active? ? 'green' : 'red' %>
             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-<%= status_color %>-100 text-<%= status_color %>-800">
-              <%= t("activerecord.attributes.product.statuses.#{@product.status}") %>
+              <%= t(".status.#{@machine.status}") %>
             </span>
           </dd>
         </div>
 
-        <!-- Seção de Máquinas -->
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.machines.title') %></dt>
+          <dt class="text-sm font-medium text-gray-500"><%= t('.products.title') %></dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <% if @product.machines.any? %>
+            <% if @machine.products.any? %>
               <div class="space-y-2">
-                <% @product.machines.each do |machine| %>
+                <% @machine.products.each do |product| %>
                   <div class="flex items-center bg-gray-50 p-2 rounded-md">
                     <div class="flex-1">
-                      <span class="font-medium"><%= machine.name %></span>
-                      <span class="text-gray-500 text-xs ml-2">(<%= machine.code %>)</span>
+                      <span class="font-medium"><%= product.name %></span>
+                      <span class="text-gray-500 text-xs ml-2">(<%= product.code %>)</span>
                     </div>
                   </div>
                 <% end %>
               </div>
             <% else %>
-              <p class="text-gray-500 italic"><%= t('.machines.empty') %></p>
+              <p class="text-gray-500 italic"><%= t('.products.empty') %></p>
             <% end %>
           </dd>
         </div>
@@ -77,10 +59,10 @@
 
   <div class="mt-6 flex justify-end space-x-4">
     <%= link_to t('.actions.edit'),
-                edit_product_path(@product),
+                edit_machine_path(@machine),
                 class: "bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg" %>
     <%= link_to t('.actions.deactivate'),
-                product_path(@product),
+                machine_path(@machine),
                 data: {
                   turbo_method: :delete,
                   turbo_confirm: t('.actions.confirm_deactivate')
