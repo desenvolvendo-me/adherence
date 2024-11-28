@@ -1,0 +1,120 @@
+pt-BR:
+  products:
+    common: &common
+      back: "Voltar"
+      product_details: "Detalhes do Produto"
+      units:
+        seconds: "s"
+        minutes: "min"
+
+    show:
+      <<: *common
+      title: "Visualizar Produto"
+      code: "Código"
+      standard_time: "Tempo Padrão"
+      setup_time: "Tempo de Setup"
+      status:
+        title: "Situação"
+        active: "Ativo"
+        inactive: "Inativo"
+      machines:
+        title: "Máquinas Vinculadas"
+        empty: "Nenhuma máquina vinculada a este produto"
+      actions:
+        edit: "Editar Produto"
+        deactivate: "Inativar Produto"
+        confirm_deactivate: "Tem certeza que deseja inativar este produto?"
+
+    edit:
+      <<: *common
+      title: "Editar Produto"
+      edit_product: "Edição de Produto"
+      form_description: "Atualize as informações do produto e gerencie suas máquinas associadas"
+      product_overview:
+        title: "Visão Geral do Produto"
+        code: "Código"
+        machines: "Máquinas"
+        machines_count: "máquinas vinculadas"
+        status: "Situação"
+
+    new:
+      <<: *common
+      title: "Novo Produto"
+      new_product: "Cadastrar Produto"
+      form_description: "Preencha as informações para cadastrar um novo produto"
+      quick_tips:
+        title: "Dicas Rápidas"
+        code_tip: "Use códigos únicos e descritivos para fácil identificação"
+        time_tip: "Tempos precisos ajudam na otimização da produção"
+        machines_tip: "Associe todas as máquinas compatíveis com o produto"
+
+    form:
+      error: "erro"
+      error_message: "foram encontrados"
+      code_placeholder: "Digite o código do produto"
+      name_placeholder: "Digite o nome do produto"
+      standard_time_placeholder: "Digite o tempo padrão"
+      setup_time_placeholder: "Digite o tempo de setup"
+      cancel: "Cancelar"
+      save: "Salvar"
+      required: "Obrigatório"
+      machines:
+        title: "Máquinas"
+        label: "Máquina"
+        add: "Adicionar Máquina"
+        remove: "Remover"
+        select_prompt: "Selecione uma máquina"
+
+    index:
+      title: "Produtos"
+      description: "Gerencie seu catálogo de produtos e suas relações com máquinas."
+      new_product: "Novo Produto"
+      search_label: "Buscar produtos"
+      search_placeholder: "Buscar por código ou nome..."
+      status_label: "Filtrar por situação"
+      all_statuses: "Todas as situações"
+      search: "Buscar"
+      table:
+        code: "Código"
+        name: "Nome"
+        standard_time: "Tempo Padrão"
+        setup_time: "Tempo de Setup"
+        status: "Situação"
+        actions: "Ações"
+      status:
+        active: "Ativo"
+        inactive: "Inativo"
+      actions:
+        show: "Visualizar"
+        edit: "Editar"
+        deactivate: "Inativar"
+        confirm_deactivate: "Tem certeza que deseja inativar este produto?"
+
+  activerecord:
+    attributes:
+      product:
+        code: "Código"
+        name: "Nome"
+        standard_time: "Tempo Padrão"
+        setup_time: "Tempo de Setup"
+        status: "Situação"
+        statuses:
+          active: "Ativo"
+          inactive: "Inativo"
+    errors:
+      models:
+        product:
+          attributes:
+            code:
+              blank: "não pode ficar em branco"
+              taken: "já está em uso"
+            name:
+              blank: "não pode ficar em branco"
+            standard_time:
+              blank: "não pode ficar em branco"
+              not_a_number: "deve ser um número"
+              greater_than: "deve ser maior que zero"
+            setup_time:
+              blank: "não pode ficar em branco"
+              not_a_number: "deve ser um número"
+              greater_than: "deve ser maior que zero"

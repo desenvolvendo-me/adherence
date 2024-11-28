@@ -1,90 +1,118 @@
 <!-- app/views/products/show.html.erb -->
-<header class="bg-white shadow">
-  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-gray-900"><%= t('.title') %></h1>
-      <%= link_to products_path,
-                  class: "text-gray-600 hover:text-gray-900 font-medium" do %>
-        ← <%= t('.back') %>
-      <% end %>
+<div class="min-h-screen bg-gray-50">
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <%= link_to products_path,
+                      class: "text-gray-600 hover:text-gray-900 inline-flex items-center" do %>
+            <svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <%= t('.back') %>
+          <% end %>
+          <h1 class="text-2xl font-bold text-gray-900 ml-4"><%= t('.title') %></h1>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <%= link_to edit_product_path(@product),
+                      class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors" do %>
+            <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            <%= t('.actions.edit') %>
+          <% end %>
+
+          <%= link_to product_path(@product),
+                      data: {
+                        turbo_method: :delete,
+                        turbo_confirm: t('.actions.confirm_deactivate')
+                      },
+                      class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors" do %>
+            <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+            </svg>
+            <%= t('.actions.deactivate') %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
-        <%= @product.name %>
-      </h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">
-        <%= t('.code') %>: <%= @product.code %>
-      </p>
-    </div>
+  <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900">
+              <%= @product.name %>
+            </h2>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+              <%= t('.code') %>: <span class="font-mono"><%= @product.code %></span>
+            </p>
+          </div>
 
-    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-      <dl class="sm:divide-y sm:divide-gray-200">
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.standard_time') %></dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= number_with_precision(@product.standard_time, precision: 2) %><%= t('.units.seconds') %>
-          </dd>
+          <% status_color = @product.active? ? 'green' : 'red' %>
+          <span class="px-3 py-1 inline-flex text-sm font-medium rounded-full bg-<%= status_color %>-100 text-<%= status_color %>-800">
+            <%= t(".status.#{@product.status}") %>
+          </span>
         </div>
+      </div>
 
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.setup_time') %></dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <%= number_with_precision(@product.setup_time, precision: 2) %><%= t('.units.minutes') %>
-          </dd>
+      <div class="border-t border-gray-200 px-4 py-5">
+        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2">
+          <div>
+            <dt class="text-sm font-medium text-gray-500"><%= t('.standard_time') %></dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              <%= number_with_precision(@product.standard_time, precision: 2) %><%= t('.units.seconds') %>
+            </dd>
+          </div>
+
+          <div>
+            <dt class="text-sm font-medium text-gray-500"><%= t('.setup_time') %></dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              <%= number_with_precision(@product.setup_time, precision: 2) %><%= t('.units.minutes') %>
+            </dd>
+          </div>
         </div>
+      </div>
 
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.status') %></dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <% status_color = case @product.status
-                              when 'active' then 'green'
-                              when 'inactive' then 'red'
-                              else 'yellow' end %>
-            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-<%= status_color %>-100 text-<%= status_color %>-800">
-              <%= t("activerecord.attributes.product.statuses.#{@product.status}") %>
-            </span>
-          </dd>
-        </div>
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">
+          <%= t('.machines.title') %>
+        </h3>
 
-        <!-- Seção de Máquinas -->
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500"><%= t('.machines.title') %></dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <% if @product.machines.any? %>
-              <div class="space-y-2">
-                <% @product.machines.each do |machine| %>
-                  <div class="flex items-center bg-gray-50 p-2 rounded-md">
-                    <div class="flex-1">
-                      <span class="font-medium"><%= machine.name %></span>
-                      <span class="text-gray-500 text-xs ml-2">(<%= machine.code %>)</span>
+        <% if @product.machines.any? %>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <% @product.machines.each do |machine| %>
+              <%= link_to machine_path(machine), class: "block" do %>
+                <div class="bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                      <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                        <svg class="h-4 w-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="ml-4">
+                      <h4 class="text-sm font-medium text-gray-900"><%= machine.name %></h4>
+                      <p class="mt-1 text-xs text-gray-500 font-mono"><%= machine.code %></p>
                     </div>
                   </div>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="text-gray-500 italic"><%= t('.machines.empty') %></p>
+                </div>
+              <% end %>
             <% end %>
-          </dd>
-        </div>
-      </dl>
+          </div>
+        <% else %>
+          <div class="bg-gray-50 rounded-lg p-8 text-center">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+            </svg>
+            <p class="mt-4 text-sm text-gray-500 italic"><%= t('.machines.empty') %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-
-  <div class="mt-6 flex justify-end space-x-4">
-    <%= link_to t('.actions.edit'),
-                edit_product_path(@product),
-                class: "bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg" %>
-    <%= link_to t('.actions.deactivate'),
-                product_path(@product),
-                data: {
-                  turbo_method: :delete,
-                  turbo_confirm: t('.actions.confirm_deactivate')
-                },
-                class: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg" %>
-  </div>
+  </main>
 </div>

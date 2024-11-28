@@ -1,0 +1,126 @@
+pt-BR:
+  machines:
+    # Core shared translations to optimize reusability
+    common: &common
+      back: "Voltar"
+      machine_details: "Detalhes da Máquina"
+      units:
+        total: "Total"
+        quantity: "Quantidade"
+      error_messages: &error_messages
+        error: "erro"
+        error_message: "foram encontrados"
+
+    # Dynamic visualization of machine details
+    show:
+      <<: *common
+      title: "Visualizar Máquina"
+      code: "Código"
+      status:
+        title: "Situação"
+        active: "Ativo"
+        inactive: "Inativo"
+      products:
+        title: "Produtos Associados"
+        empty: "Nenhum produto associado a esta máquina"
+        efficiency: "Eficiência"
+        capacity: "Capacidade"
+      actions:
+        edit: "Editar Máquina"
+        deactivate: "Inativar Máquina"
+        confirm_deactivate: "Tem certeza que deseja desativar esta máquina? Esta ação afetará todos os produtos associados."
+
+    # Machine configuration interface
+    edit:
+      <<: *common
+      title: "Editar Máquina"
+      form_description: "Atualize as configurações da máquina para otimizar seu desempenho"
+      machine_overview:
+        title: "Visão Geral"
+        status: "Status Operacional"
+        products_count: "Produtos Vinculados"
+        efficiency_metrics: "Métricas de Eficiência"
+
+    # Streamlined machine creation
+    new:
+      <<: *common
+      title: "Nova Máquina"
+      new_machine: "Cadastrar Máquina"
+      form_description: "Configure uma nova máquina para expandir sua capacidade produtiva"
+      quick_tips:
+        title: "Dicas de Configuração"
+        code_tip: "Use um código único e descritivo para fácil identificação"
+        name_tip: "Escolha um nome que reflita a função principal da máquina"
+        status_tip: "Defina o status inicial com base na disponibilidade imediata"
+
+    # Interactive form components
+    form:
+      <<: *error_messages
+      code_placeholder: "Digite o código único da máquina"
+      name_placeholder: "Digite o nome descritivo da máquina"
+      status_label: "Status Operacional"
+      cancel: "Cancelar"
+      save: "Salvar Configurações"
+      required: "Obrigatório"
+
+    # Machine management dashboard
+    index:
+      title: "Máquinas"
+      description: "Gerencie sua infraestrutura de produção com eficiência e precisão"
+      new_machine: "Adicionar Nova Máquina"
+      search:
+        label: "Buscar máquinas"
+        placeholder: "Buscar por código ou nome..."
+        status_label: "Filtrar por status"
+        all_statuses: "Todos os status"
+        button: "Buscar"
+      table:
+        code: "Código"
+        name: "Nome"
+        status: "Status"
+        efficiency: "Eficiência"
+        actions: "Ações"
+      operational_status:
+        active: "Operacional"
+        inactive: "Inativa"
+      actions:
+        show: "Visualizar Detalhes"
+        edit: "Editar Configurações"
+        deactivate: "Desativar Máquina"
+        confirm_deactivate: "Confirma a desativação desta máquina? Esta ação pode impactar a produção."
+
+    # System messages and notifications
+    messages:
+      success:
+        created: "Máquina cadastrada com sucesso!"
+        updated: "Configurações atualizadas com sucesso!"
+        deleted: "Máquina desativada com sucesso!"
+      errors:
+        create: "Não foi possível cadastrar a máquina"
+        update: "Não foi possível atualizar as configurações"
+        delete: "Não foi possível desativar a máquina"
+
+  # ActiveRecord model configurations
+  activerecord:
+    attributes:
+      machine:
+        code: "Código"
+        name: "Nome"
+        status: "Status"
+        efficiency: "Eficiência"
+        capacity: "Capacidade"
+        statuses:
+          active: "Operacional"
+          inactive: "Inativa"
+    errors:
+      models:
+        machine:
+          attributes:
+            code:
+              blank: "é obrigatório para identificação única"
+              taken: "já está em uso em outra máquina"
+            name:
+              blank: "é necessário para referência operacional"
+              too_short: "deve ter pelo menos 3 caracteres"
+            status:
+              blank: "precisa ser definido para controle operacional"
