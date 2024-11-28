@@ -34,19 +34,14 @@ pt-BR:
     edit:
       <<: *common
       title: "Editar Máquina"
-      form_description: "Atualize as configurações da máquina para otimizar seu desempenho"
-      machine_overview:
-        title: "Visão Geral"
-        status: "Status Operacional"
-        products_count: "Produtos Vinculados"
-        efficiency_metrics: "Métricas de Eficiência"
+      form_description: "Atualize as configurações da máquina"
 
     # Streamlined machine creation
     new:
       <<: *common
       title: "Nova Máquina"
       new_machine: "Cadastrar Máquina"
-      form_description: "Configure uma nova máquina para expandir sua capacidade produtiva"
+      form_description: "Configure uma nova máquina"
       quick_tips:
         title: "Dicas de Configuração"
         code_tip: "Use um código único e descritivo para fácil identificação"
@@ -106,11 +101,9 @@ pt-BR:
       machine:
         code: "Código"
         name: "Nome"
-        status: "Status"
-        efficiency: "Eficiência"
-        capacity: "Capacidade"
+        status: "Situação"
         statuses:
-          active: "Operacional"
+          active: "Ativa"
           inactive: "Inativa"
     errors:
       models:

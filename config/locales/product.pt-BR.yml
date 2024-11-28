@@ -29,7 +29,7 @@ pt-BR:
       <<: *common
       title: "Editar Produto"
       edit_product: "Edição de Produto"
-      form_description: "Atualize as informações do produto e gerencie suas máquinas associadas"
+      form_description: "Atualize as configurações da produto"
       product_overview:
         title: "Visão Geral do Produto"
         code: "Código"
@@ -101,6 +101,7 @@ pt-BR:
         statuses:
           active: "Ativo"
           inactive: "Inativo"
+          in_development: "Em Desenvolvimento"
     errors:
       models:
         product:
