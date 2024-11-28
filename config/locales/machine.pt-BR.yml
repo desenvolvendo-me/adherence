@@ -51,8 +51,8 @@ pt-BR:
     # Interactive form components
     form:
       <<: *error_messages
-      code_placeholder: "Digite o código único da máquina"
-      name_placeholder: "Digite o nome descritivo da máquina"
+      code_placeholder: "Digite o código da máquina"
+      name_placeholder: "Digite o nome da máquina"
       status_label: "Status Operacional"
       cancel: "Cancelar"
       save: "Salvar Configurações"
