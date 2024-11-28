@@ -1,25 +1,52 @@
 pt-BR:
   machines:
-    show:
-      title: "Detalhes da Máquina"
+    common: &common
       back: "Voltar"
+      machine_details: "Detalhes da Máquina"
+
+    show:
+      <<: *common
+      title: "Visualizar Máquina"
       code: "Código"
       status:
         title: "Situação"
-        active: "Ativa"
-        inactive: "Inativa"
+        active: "Ativo"
+        inactive: "Inativo"
       products:
-        title: "Produtos Vinculados"
-        empty: "Nenhum produto vinculado"
+        title: "Produtos Associados"
+        empty: "Nenhum produto associado a esta máquina"
       actions:
-        edit: "Editar"
-        deactivate: "Inativar"
-        confirm_deactivate: "Tem certeza que deseja inativar esta máquina?"
+        edit: "Editar Máquina"
+        deactivate: "Desativar Máquina"
+        confirm_deactivate: "Tem certeza que deseja desativar esta máquina?"
+
+    edit:
+      <<: *common
+      title: "Editar Máquina"
+      form_description: "Atualize as informações da máquina conforme necessário"
+      new_machine: "Nova Máquina"
+
+    new:
+      <<: *common
+      title: "Nova Máquina"
+      new_machine: "Cadastrar Máquina"
+      form_description: "Preencha as informações para cadastrar uma nova máquina"
+
+    form:
+      error: "erro"
+      error_message: "foram encontrados"
+      code_placeholder: "Digite o código da máquina"
+      name_placeholder: "Digite o nome da máquina"
+      cancel: "Cancelar"
+      save: "Salvar"
+      required: "Obrigatório"
+
     index:
       title: "Máquinas"
+      description: "Gerencie sua frota de máquinas de forma eficiente."
       new_machine: "Nova Máquina"
-      search_placeholder: "Buscar por código ou nome"
-      all_statuses: "Todos os status"
+      search_placeholder: "Buscar por código ou nome..."
+      all_statuses: "Todas as situações"
       search: "Buscar"
       table:
         code: "Código"
@@ -27,13 +54,13 @@ pt-BR:
         status: "Situação"
         actions: "Ações"
       status:
-        active: "Ativa"
-        inactive: "Inativa"
+        active: "Ativo"
+        inactive: "Inativo"
       actions:
-        show: "Ver"
+        show: "Visualizar"
         edit: "Editar"
-        deactivate: "Inativar"
-        confirm_deactivate: "Tem certeza que deseja inativar esta máquina?"
+        deactivate: "Desativar"
+        confirm_deactivate: "Tem certeza que deseja desativar esta máquina?"
   products:
     show:
       title: "Detalhes do Produto"
@@ -73,3 +100,9 @@ pt-BR:
         edit: "Editar"
         deactivate: "Inativar"
         confirm_deactivate: "Tem certeza que deseja inativar este produto?"
+  pagination:
+    first: "Primeira"
+    last: "Última"
+    previous: "Anterior"
+    next: "Próxima"
+    truncate: "..."
