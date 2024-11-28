@@ -1,4 +1,17 @@
 pt-BR:
+  helpers:
+    page_entries_info:
+      entry:
+        zero: "registros"
+        one: "registro"
+        other: "registros"
+      one_page:
+        display_entries:
+          zero: "Nenhum %{entry_name} encontrado"
+          one: "Exibindo <b>1</b> %{entry_name}"
+          other: "Exibindo <b>%{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Mostrando <b>%{first}&nbsp;até&nbsp;%{last}</b> de <b>%{total}</b> registros"
   views:
     pagination:
       first: "&laquo;"
