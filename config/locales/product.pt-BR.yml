@@ -41,12 +41,7 @@ pt-BR:
       <<: *common
       title: "Novo Produto"
       new_product: "Cadastrar Produto"
-      form_description: "Preencha as informações para cadastrar um novo produto"
-      quick_tips:
-        title: "Dicas Rápidas"
-        code_tip: "Use códigos únicos e descritivos para fácil identificação"
-        time_tip: "Tempos precisos ajudam na otimização da produção"
-        machines_tip: "Associe todas as máquinas compatíveis com o produto"
+      form_description: "Configure um novo produto"
 
     form:
       error: "erro"
