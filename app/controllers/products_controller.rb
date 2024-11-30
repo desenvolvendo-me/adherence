@@ -7,6 +7,11 @@ class ProductsController < ApplicationController
     @products = @q.result
                   .order(code: :asc)
                   .page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def show
