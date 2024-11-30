@@ -4,6 +4,16 @@ class MachinesController < ApplicationController
   def index
     @q = Machine.ransack(params[:q])
     @machines = @q.result.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.update("machines_list",
+                                                 partial: "machines_table",
+                                                 locals: { machines: @machines }
+        )
+      }
+    end
   end
 
   def show
