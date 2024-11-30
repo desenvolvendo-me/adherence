@@ -10,7 +10,12 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.update("products_list",
+                                                 partial: "products_table",
+                                                 locals: { products: @products }
+        )
+      }
     end
   end
 

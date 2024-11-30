@@ -2,19 +2,19 @@
   <thead class="bg-gray-50">
   <tr>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :code, t('.table.code')) %>
+      <%= sort_link(@q, :code, t('.table.code'), {}, { data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :name, t('.table.name')) %>
+      <%= sort_link(@q, :name, t('.table.name'), {}, { data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :standard_time, t('.table.standard_time')) %>
+      <%= sort_link(@q, :standard_time, t('.table.standard_time'), {}, { data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :setup_time, t('.table.setup_time')) %>
+      <%= sort_link(@q, :setup_time, t('.table.setup_time'), {}, { data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :status, t('.table.status')) %>
+      <%= sort_link(@q, :status, t('.table.status'), {}, { data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="relative px-6 py-3">
       <span class="sr-only"><%= t('.table.actions') %></span>
