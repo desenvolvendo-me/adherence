@@ -17,6 +17,15 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # Desabilitar a compilação de assets em desenvolvimento
+  config.assets.compile = true
+  # Não comprimir assets em desenvolvimento
+  config.assets.compress = false
+  # Não digerir os assets em desenvolvimento
+  config.assets.digest = false
+  # Desabilitar cache de assets em desenvolvimento
+  config.assets.debug = true
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
