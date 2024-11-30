@@ -26,9 +26,7 @@ class Product < ApplicationRecord
   # Callbacks
   before_validation :upcase_code
 
-  accepts_nested_attributes_for :machine_products,
-                                allow_destroy: true,
-                                reject_if: lambda { |attributes| attributes['machine_id'].blank? }
+  accepts_nested_attributes_for :machine_products, allow_destroy: true
 
   private
 
