@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby "3.2.2"
+ruby "3.3.6"
 
 gem 'rails', '~> 7.1', '>= 7.1.5'
 gem "pg", "~> 1.5.4"
