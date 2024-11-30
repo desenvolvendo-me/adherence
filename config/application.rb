@@ -22,6 +22,8 @@ module ProductionAdherence
   class Application < Rails::Application
     config.load_defaults 7.1  # Use a versão mais recente dos defaults
 
+    config.assets.paths << Rails.root.join("app/assets/stylesheets")
+
     # Configuração do timezone
     config.time_zone = "Brasilia"
     config.active_record.default_timezone = :local
