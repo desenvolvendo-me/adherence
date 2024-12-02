@@ -3,16 +3,7 @@ class Product < ApplicationRecord
   has_many :machines, through: :machine_products
 
   # Enums
-  enum status: {
-    active: 'active',
-    inactive: 'inactive',
-    in_development: 'in_development'
-  }
-
-  # Scopes
-  scope :active, -> { where(status: :active) }
-  scope :by_code, ->(code) { where("code ILIKE ?", "%#{code}%") }
-  scope :by_name, ->(name) { where("name ILIKE ?", "%#{name}%") }
+  enum :status, { active: 'active', inactive: 'inactive', in_development: 'in_development' }
 
   # Validações
   validates :code, presence: true, uniqueness: true

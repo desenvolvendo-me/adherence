@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_19_233912) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema[8.0].define(version: 2024_12_02_170847) do
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "published_at"
+  end
 
   create_table "machine_products", force: :cascade do |t|
-    t.bigint "machine_id", null: false
-    t.bigint "product_id", null: false
+    t.integer "machine_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["machine_id", "product_id"], name: "index_machine_products_on_machine_id_and_product_id", unique: true

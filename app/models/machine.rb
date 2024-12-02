@@ -3,21 +3,13 @@ class Machine < ApplicationRecord
   has_many :products, through: :machine_products
 
   # Enums
-  enum status: {
-    active: 0,
-    inactive: 1
-  }
+  enum :status, { active: 0, inactive: 1 }
 
   # Validations
   validates :code, presence: true, uniqueness: true
   validates :name, presence: true
   validates :status, presence: true
   validate :validate_code_format
-
-  # Scopes
-  scope :search, ->(term) {
-    where("code ILIKE :term OR name ILIKE :term", term: "%#{term}%") if term.present?
-  }
 
   def self.ransackable_attributes(auth_object = nil)
     ["code", "name", "status"]

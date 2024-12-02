@@ -61,7 +61,7 @@
 
       <!-- Results Table Card -->
       <div class="bg-white shadow rounded-lg">
-        <%= turbo_frame_tag "products_list" do %>
+        <%= turbo_frame_tag "products_list", dom_id(Product) do %>
           <div class="overflow-x-auto">
             <%= render partial: "products_table", locals: { products: @products } %>
           </div>

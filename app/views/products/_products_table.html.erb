@@ -2,19 +2,19 @@
   <thead class="bg-gray-50">
   <tr>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :code, t('.table.code'), {}, { data: { turbo_frame: "products_list" } }) %>
+      <%= sort_link(@q, :code, t('.table.code'), { class: "...", data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :name, t('.table.name'), {}, { data: { turbo_frame: "products_list" } }) %>
+      <%= sort_link(@q, :name, t('.table.name'), { class: "...", data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :standard_time, t('.table.standard_time'), {}, { data: { turbo_frame: "products_list" } }) %>
+      <%= sort_link(@q, :standard_time, t('.table.standard_time'), { class: "...", data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :setup_time, t('.table.setup_time'), {}, { data: { turbo_frame: "products_list" } }) %>
+      <%= sort_link(@q, :setup_time, t('.table.setup_time'), { class: "...", data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-      <%= sort_link(@q, :status, t('.table.status'), {}, { data: { turbo_frame: "products_list" } }) %>
+      <%= sort_link(@q, :status, t('.table.status'), {}, { class: "...", data: { turbo_frame: "products_list" } }) %>
     </th>
     <th scope="col" class="relative px-6 py-3">
       <span class="sr-only"><%= t('.table.actions') %></span>
@@ -45,6 +45,7 @@
       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <div class="flex justify-end space-x-3">
           <%= link_to product_path(product),
+                      data: { turbo: false },
                       class: "text-blue-600 hover:text-blue-900 transition-colors",
                       title: t('.actions.show') do %>
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,6 +55,7 @@
           <% end %>
 
           <%= link_to edit_product_path(product),
+                      data: { turbo: false },
                       class: "text-blue-600 hover:text-blue-900 transition-colors",
                       title: t('.actions.edit') do %>
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

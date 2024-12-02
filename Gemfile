@@ -1,41 +1,39 @@
 source "https://rubygems.org"
-ruby "3.3.6"
 
-gem 'rails', '~> 7.1', '>= 7.1.5'
-gem "pg", "~> 1.5.4"
-gem "puma", "~> 6.0"
+gem "rails", "~> 8.0.0"
 gem "propshaft"
+gem "sqlite3", ">= 2.1"
+gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
-gem "tailwindcss-rails"
+gem "jbuilder"
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "solid_cache"
+gem "solid_queue"
+gem "solid_cable"
 gem "bootsnap", require: false
+gem "kamal", require: false
+gem "thruster", require: false
+
 gem "kaminari"
 gem 'ransack'
 gem "foreman"
+gem "tailwindcss-rails"
 
-# Testing
-gem "rspec-rails"
-gem "factory_bot_rails"
-gem "faker"
-gem "shoulda-matchers"
-gem "database_cleaner-active_record"
 
-# Debug
-gem "pry-rails"
-gem "awesome_print"
-
-# Security
-gem "brakeman"
-gem "bundler-audit"
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "brakeman", require: false
+  gem "rubocop-rails-omakase", require: false
+end
 
 group :development do
-  gem "rubocop"
-  gem "rubocop-rails"
-  gem "rubocop-rspec"
+  gem "web-console"
 end
 
 group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
 end

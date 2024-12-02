@@ -42,7 +42,10 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to products_path, notice: 'Produto atualizado com sucesso.'
+      respond_to do |format|
+        format.html { redirect_to products_path, notice: 'Produto atualizado com sucesso.' }
+        format.turbo_stream { redirect_to product_path(@product), notice: 'Produto atualizado com sucesso.' }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
