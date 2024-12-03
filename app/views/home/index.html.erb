@@ -38,10 +38,12 @@
         <% end %>
       </div>
 
-      <div data-controller="hello">
-        <h1 data-hello-target="output">Original Text</h1>
-        <button data-action="click->hello#greet">Greet</button>
-      </div>
+      <% if Rails.env.development? %>
+        <div data-controller="hello">
+          <h1 data-hello-target="output">Original Text</h1>
+          <button data-action="click->hello#greet">Greet</button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
