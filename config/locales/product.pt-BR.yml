@@ -84,6 +84,9 @@ pt-BR:
         show: "Visualizar"
         edit: "Editar"
         deactivate: "Inativar"
+
+    products_table:
+      actions:
         confirm_deactivate: "Tem certeza que deseja inativar este produto?"
 
   activerecord:

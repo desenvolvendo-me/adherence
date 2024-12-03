@@ -79,6 +79,9 @@ pt-BR:
         show: "Visualizar"
         edit: "Editar"
         deactivate: "Inativar"
+
+    machines_table:
+      actions:
         confirm_deactivate: "Confirma a desativação desta máquina? Esta ação pode impactar a produção."
 
     # System messages and notifications
