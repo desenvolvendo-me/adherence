@@ -49,6 +49,11 @@ class MachinesController < ApplicationController
     redirect_to machines_path, notice: 'Máquina removida com sucesso.'
   end
 
+  def products
+    @machine = Machine.find(params[:id])
+    render json: @machine.products.active.select(:id, :name)
+  end
+
   private
 
   def set_machine

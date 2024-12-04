@@ -1,0 +1,66 @@
+<%= form_with(model: @production_planning, class: "space-y-6") do |f| %>
+  <% if @production_planning.errors.any? %>
+    <div class="bg-red-50 p-4 rounded-md">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">
+            <%= pluralize(@production_planning.errors.count, "erro") %> encontrado:
+          </h3>
+          <ul class="mt-2 text-sm text-red-700 list-disc list-inside">
+            <% @production_planning.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <%= f.label :planning_date, "Data do Planejamento", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.date_field :planning_date, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm" %>
+    </div>
+
+    <div>
+      <%= f.label :shift, "Turno", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.select :shift,
+                   ProductionPlanning.shifts.map { |k, v| [t("shifts.#{k}"), k] },
+                   { include_blank: "Selecione o turno" },
+                   class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm" %>
+    </div>
+  </div>
+
+  <div class="items-wrapper" data-controller="nested-form">
+    <template data-nested-form-target="template">
+      <%= f.fields_for :production_planning_items, ProductionPlanningItem.new, child_index: 'NEW_RECORD' do |item| %>
+        <%= render "production_planning_item_fields", f: item %>
+      <% end %>
+    </template>
+
+    <%= f.fields_for :production_planning_items do |item| %>
+      <%= render "production_planning_item_fields", f: item %>
+    <% end %>
+
+    <div class="mt-2">
+      <%= link_to "Adicionar Máquina",
+                  "#",
+                  class: "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                  data: { action: "click->nested-form#add" } %>
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end space-x-4">
+    <%= link_to "Cancelar",
+                production_plannings_path,
+                class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+
+    <%= f.submit "Salvar Planejamento",
+                 class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+  </div>
+<% end %>

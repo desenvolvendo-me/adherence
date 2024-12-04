@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :machines
+  resources :production_plannings
+  resources :machines do
+    get 'products', on: :member
+  end
   resources :products
   root 'home#index'
 

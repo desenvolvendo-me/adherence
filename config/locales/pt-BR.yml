@@ -7,3 +7,7 @@ pt-BR:
       too_long: é muito longo (máximo é %{count} caracteres)
       invalid: não é válido
       not_a_number: "deve ser um número"
+  shifts:
+    first_shift: "1º Turno (06:00 - 14:00)"
+    second_shift: "2º Turno (14:00 - 22:00)"
+    third_shift: "3º Turno (22:00 - 06:00)"

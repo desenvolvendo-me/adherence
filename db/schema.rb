@@ -38,6 +38,26 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_02_170847) do
     t.index ["code"], name: "index_machines_on_code", unique: true
   end
 
+  create_table "production_planning_items", force: :cascade do |t|
+    t.integer "production_planning_id", null: false
+    t.integer "machine_id", null: false
+    t.integer "product_id", null: false
+    t.integer "goal", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["machine_id"], name: "index_production_planning_items_on_machine_id"
+    t.index ["product_id"], name: "index_production_planning_items_on_product_id"
+    t.index ["production_planning_id"], name: "index_production_planning_items_on_production_planning_id"
+  end
+
+  create_table "production_plannings", force: :cascade do |t|
+    t.date "planning_date", null: false
+    t.string "shift", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["planning_date", "shift"], name: "index_production_plannings_on_planning_date_and_shift", unique: true
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "code", null: false
     t.string "name", null: false
@@ -51,4 +71,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_02_170847) do
 
   add_foreign_key "machine_products", "machines"
   add_foreign_key "machine_products", "products"
+  add_foreign_key "production_planning_items", "machines"
+  add_foreign_key "production_planning_items", "production_plannings"
+  add_foreign_key "production_planning_items", "products"
 end
