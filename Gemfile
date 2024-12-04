@@ -23,6 +23,7 @@ gem "tailwindcss-rails"
 
 
 group :development, :test do
+  gem "rails_live_reload"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
