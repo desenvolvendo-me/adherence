@@ -1,12 +1,8 @@
-# POC
+# Como rodar o projeto?
 
-### Problema 1
-Foi necessário configurar acesso ao docker hub
-
-E adicionar a senha em
-```
-vi ~/.zshrc
-
-export KAMAL_REGISTRY_PASSWORD="SENHA DOCKER HUB"
-
-```
+1. Instale as dependências
+- Instale a versão do ruby
+- Execute o bundle install
+- Execute o rails db:migrate
+2. Rode o projeto
+3. Acesse o projeto em http://localhost:3000

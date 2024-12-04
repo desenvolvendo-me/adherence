@@ -5,10 +5,10 @@ export default class extends Controller {
   static targets = [ "output" ]
 
   connect() {
-    console.log("Hello controller connected!")
+    console.log("Stimulus controller connected!")
   }
 
   greet() {
-    this.outputTarget.textContent = "Hello, Stimulus!"
+    this.outputTarget.textContent = "Stimulus works!"
   }
 }

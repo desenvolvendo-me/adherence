@@ -70,13 +70,6 @@ pt-BR:
         status_label: "Filtrar por situação"
         all_statuses: "Todos os situações"
         button: "Buscar"
-      table:
-        code: "Código"
-        name: "Nome"
-        standard_time: "Tempo Padrão"
-        setup_time: "Tempo de Setup"
-        status: "Situação"
-        actions: "Ações"
       status:
         active: "Ativo"
         inactive: "Inativo"
@@ -86,6 +79,13 @@ pt-BR:
         deactivate: "Inativar"
 
     products_table:
+      table:
+        code: "Código"
+        name: "Nome"
+        standard_time: "Tempo Padrão"
+        setup_time: "Tempo de Setup"
+        status: "Situação"
+        actions: "Ações"
       actions:
         confirm_deactivate: "Tem certeza que deseja inativar este produto?"
 

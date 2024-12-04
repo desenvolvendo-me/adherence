@@ -69,18 +69,18 @@ pt-BR:
         status_label: "Filtrar por situação"
         all_statuses: "Todos os situações"
         button: "Buscar"
-      table:
-        code: "Código"
-        name: "Nome"
-        status: "Situação"
-        efficiency: "Eficiência"
-        actions: "Ações"
       actions:
         show: "Visualizar"
         edit: "Editar"
         deactivate: "Inativar"
 
     machines_table:
+      table:
+        code: "Código"
+        name: "Nome"
+        status: "Situação"
+        efficiency: "Eficiência"
+        actions: "Ações"
       actions:
         confirm_deactivate: "Confirma a desativação desta máquina? Esta ação pode impactar a produção."
 
