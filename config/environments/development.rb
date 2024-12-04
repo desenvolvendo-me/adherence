@@ -15,6 +15,15 @@ Rails.application.configure do
   # Enable server timing.
   config.server_timing = true
 
+  config.assets.debug = true
+  config.assets.compile = true
+  config.assets.digest = false
+  config.assets.check_precompiled_asset = false
+  config.assets.prefix = "/dev-assets"
+
+  config.cache_classes = false
+  config.action_controller.perform_caching = false
+
   # Enable/disable Action Controller caching. By default Action Controller caching is disabled.
   # Run rails dev:cache to toggle Action Controller caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?

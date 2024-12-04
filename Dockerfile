@@ -10,7 +10,7 @@ WORKDIR /rails
 # Install base packages and Node.js/Yarn for asset compilation
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 \
-    nodejs npm && \
+    nodejs npm git && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 

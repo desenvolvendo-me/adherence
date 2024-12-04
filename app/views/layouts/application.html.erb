@@ -13,7 +13,11 @@
   <link rel="apple-touch-icon" href="/icon.png">
   <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
+  <% if Rails.env.development? %>
+    <%= javascript_importmap_tags %>
+  <% else %>
+    <%= javascript_importmap_tags preload: true %>
+  <% end %>
 </head>
 
 <body class="bg-gray-100">
