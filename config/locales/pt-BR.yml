@@ -7,6 +7,16 @@ pt-BR:
       too_long: é muito longo (máximo é %{count} caracteres)
       invalid: não é válido
       not_a_number: "deve ser um número"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d/%m"
+      long: "%d de %B de %Y"
+    day_names: [ Domingo, Segunda-feira, Terça-feira, Quarta-feira, Quinta-feira, Sexta-feira, Sábado ]
+    abbr_day_names: [ Dom, Seg, Ter, Qua, Qui, Sex, Sáb ]
+    month_names: [ ~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro ]
+    abbr_month_names: [ ~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez ]
+    order: [ day, month, year ]
   shifts:
     first_shift: "1º Turno (06:00 - 14:00)"
     second_shift: "2º Turno (14:00 - 22:00)"
