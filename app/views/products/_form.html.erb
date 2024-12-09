@@ -1,3 +1,4 @@
+<!-- app/views/products/_form.html.erb -->
 <%= form_with(model: product, class: "space-y-6") do |f| %>
   <% if product.errors.any? %>
     <div class="rounded-md bg-red-50 p-4 mb-6">
@@ -68,15 +69,7 @@
       </div>
     </div>
 
-    <div class="sm:col-span-2">
-      <%= f.label :status, class: "block text-sm font-medium text-gray-700" %>
-      <div class="mt-1">
-        <%= f.select :status,
-                     Product.statuses.keys.map { |s| [t("activerecord.attributes.product.statuses.#{s}"), s] },
-                     { selected: 'inactive' },
-                     class: "shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
-      </div>
-    </div>
+    <%= f.hidden_field :status, value: 'inactive' %>
   </div>
 
   <div class="pt-5 border-t border-gray-200">
