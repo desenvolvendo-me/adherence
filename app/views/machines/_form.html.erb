@@ -48,7 +48,7 @@
       <div class="mt-1">
         <%= f.select :status,
                      Machine.statuses.keys.map { |s| [t("activerecord.attributes.machine.statuses.#{s}"), s] },
-                     {},
+                     { selected: 'inactive' },
                      class: "shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
       </div>
     </div>
