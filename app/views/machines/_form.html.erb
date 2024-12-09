@@ -42,17 +42,9 @@
                          placeholder: t('.name_placeholder') %>
       </div>
     </div>
-
-    <div class="sm:col-span-2">
-      <%= f.label :status, class: "block text-sm font-medium text-gray-700" %>
-      <div class="mt-1">
-        <%= f.select :status,
-                     Machine.statuses.keys.map { |s| [t("activerecord.attributes.machine.statuses.#{s}"), s] },
-                     {},
-                     class: "shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md" %>
-      </div>
-    </div>
   </div>
+
+  <%= f.hidden_field :status, value: 'inactive' %>
 
   <div class="pt-5 border-t border-gray-200">
     <div class="flex justify-end space-x-3">
