@@ -54,4 +54,4 @@
 !/app/assets/builds/.keep
 
 # Ignore
-*.DS_Store
+.DS_Store
